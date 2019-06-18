@@ -24,19 +24,47 @@ class ProductProvider extends Component {
 
     //create state, set a property products:variable thats imported
     state={
-       products: storeProducts, 
-        /* products : [],
-        detailProduct:detailProduct */
+       /* products: storeProducts,  */
+        products : [],
+        detailProduct:detailProduct 
     };
 
+
+    
+ /*3 */
+    componentDidMount(){
+      this.setProducts();
+    }
+
+    setProducts = () =>{
+      let tempProducts=[];
+      /* 1 - loop through the array in storeProduct variable in data.js */
+      storeProducts.forEach(item =>{
+        const singleItem = {...item};
+        tempProducts = [...tempProducts, singleItem];
+      });
+      /* setstate -2 */
+      this.setState(() =>{
+        return {products:tempProducts}
+      });
+
+    }
    
+    /* utility method that gets id & its for reusability */
+    getItem = (id) => {
+      const product = this.state.products.find(item =>item.id === id);
+      return product;
+    }
 
     //craete a fn
-    handleDetail = () =>{
-        console.log("hello form details");
+    handleDetail = (id) =>{
+        const product = this.getItem(id);
+        this.setState(() =>{
+          return {detailProduct:product}
+        })
     };
-    addToCart = () =>{
-        console.log("Hello from cart");
+    addToCart = (id) =>{
+        console.log(`Hello from  add.id to cart is ${id}`);
     };
     
   render() {

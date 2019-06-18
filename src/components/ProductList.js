@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import Product from './Product'
 import Title from './Title'
- import {storeProducts} from '../data' //storeProducts is the name of the array in data.js
+/*  import {storeProducts} from '../data' */ //storeProducts is the name of the array in data.js
 
 //to use the data, use consumer
 import {ProductConsumer} from '../context'
 
 export default class ProductList extends Component {
 
-   state={
+  /*  state={
     products:storeProducts
-  }; 
+  };  */
 
   render() {
 /* console.log(this.state.products); */
