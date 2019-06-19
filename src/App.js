@@ -1,15 +1,20 @@
 import React,{Component} from 'react';
 import {Switch, Route} from 'react-router-dom'
 
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 import ProductList from './components/ProductList'
 import Details from './components/Details'
-import  Cart from './components/Cart'
+
 import Default from './components/Default'
+
+import Modal from './components/Modal'  
+
+//package.json in the Cart folder is formed to make Cart.js as the main file
+//its done to avoid import Cart from './components/Cart/Cart'
+import Cart from './components/Cart'
 
  class App extends Component {
   render() {
@@ -24,6 +29,9 @@ import Default from './components/Default'
         <Route  component={Default} />
       </Switch>
         
+        {/* modal is out of the swich since no routing is set to he routet*/}
+        <Modal />
+
       </React.Fragment>
     )
   }
