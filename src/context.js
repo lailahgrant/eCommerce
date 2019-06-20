@@ -113,18 +113,77 @@ class ProductProvider extends Component {
 
   /* cart methods */
     increment = (id) =>{
-      console.log("his is increment");
-    }
+      /* get cart items from the state */
+      let tempCart = [...this.state.cart];
+      const selectedProduct = tempCart.find(item => item.id === id);
+
+      const index = tempCart.indexOf(selectedProduct);
+      const product = tempCart[index];
+
+      /* quantity is controlled by count */
+      product.count = product.count +1;
+      product.total = product.count * product.price;
+
+      
+      this.setState(() => {return{cart: [...tempCart]}}, 
+      /* call back fn passed] */
+      ()=> {this.addTotals()})
+
+    };
 
     decrement = (id) =>{
-      console.log("this is decrement");
+      /* get cart items from the state */
+      let tempCart = [...this.state.cart];
+      const selectedProduct = tempCart.find(item => item.id === id);
+
+      const index = tempCart.indexOf(selectedProduct);
+      const product = tempCart[index];
+
+      /* quantity is controlled by count */
+      product.count = product.count - 1;
+
+      if(product.count === 0){
+        this.removeItem(id)
+      }else{
+        product.total = product.count * product.price;
+
+      
+      this.setState(() => {return{cart: [...tempCart]}}, 
+      /* call back fn passed] */
+      ()=> {this.addTotals()})
+
+      }
     }
 
     removeItem = (id) =>{
       /* work with the id */
       /* create 2 temporary arrays */
-      let tempProducts = [...this.state.products]; /* detructure the ar */
-    }
+      let tempProducts = [...this.state.products]; /* detructure the array */
+      let tempCart =[...this.state.cart];
+      
+      /* filter the cart and return only the items that dont have id(id dont exist) */
+      tempCart = tempCart.filter(item => item.id !== id);
+
+      const index = tempProducts.indexOf(this.getItem(id));
+      let removedProduct = tempProducts[index];
+      /* since removing product, removed it from the cart..
+      set the inCart to false, count to 0, total to 0 */
+      removedProduct.inCart =false;
+      removedProduct.total = 0;
+      removedProduct.count = 0;
+
+      this.setState(() => {
+        return {
+          cart: [...tempCart],
+          products : [...tempProducts]
+        }
+      },
+      /* call back fn */
+      () => {
+        this.addTotals();
+      }
+      );
+    };
 
     /* in this, we should set the incart back to cart where someone can buy ie to default values */
     clearCart = () =>{
