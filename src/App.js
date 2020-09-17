@@ -26,6 +26,7 @@ import Cart from './components/Cart'
         <Route exact path="/" component={ProductList} />
         <Route path="/details" component={Details} />
         <Route path="/cart" component={Cart} />
+        <Route path="/zohoverify/verifyforzoho.html" component={} />
         <Route  component={Default} />
       </Switch>
         
